@@ -1,0 +1,41 @@
+Semantic Representations for Automated Text Reuse Detection
+
+Department of Computer Science, Example Institute of Technology
+
+Abstract
+
+Text reuse detection has traditionally relied on string matching, which fails when authors rewrite source material rather than copying it verbatim. In this paper we examine whether sentence-level embedding models can recover reuse that lexical methods miss. We build a sentence-aligned comparison pipeline over 1,200 annotated pairs and observe that paraphrase recall improves substantially while exact-match recall remains unchanged.
+
+1. Introduction
+
+In recent years, the volume of scholarly publishing has increased rapidly, and institutions have responded by deploying automated integrity screening tools. Most of these tools compare character n-grams or word sequences between documents. Such approaches are effective for verbatim copying but degrade quickly when the wording is altered. A student who replaces half of the words in a passage can reduce a string-matching score to near zero without changing the underlying claim.
+
+Semantic representations offer an alternative. A transformer encoder maps a sentence to a dense vector in a continuous space, and sentences that share meaning occupy neighbouring regions of that space. Because the representation is learned from large corpora, it is comparatively insensitive to surface form. This property is precisely what paraphrase detection requires.
+
+2. Related Work
+
+Fingerprinting methods based on hashed n-grams remain the industry standard because they are fast and easy to explain. Their weakness is that any edit invalidates the hashes. Studies of paraphrase identification have generally reported that contextual embeddings outperform static word vectors on semantic textual similarity benchmarks, although the margin depends heavily on domain. Prior work also documents a consistent problem: generic academic phrasing produces false positives in every embedding-based system evaluated so far.
+
+3. Method
+
+We segment documents into sentences using an abbreviation-aware splitter, encode each sentence with a pretrained MiniLM encoder, and compare all sentence pairs by cosine similarity. Candidate pairs are then classified as exact, near-exact or semantic using lexical evidence computed independently of the encoder. We exclude reference lists from matching because bibliographies repeat across papers and inflate similarity without indicating reuse.
+
+4. Results
+
+The pipeline recovered 71% of human-labelled paraphrases at a similarity threshold of 0.62, while the character n-gram baseline recovered 18%. Exact matches were detected with equal reliability by both approaches. Precision fell when the threshold was lowered to 0.55, largely because methodology boilerplate began to match across unrelated papers. On the annotated set, the combination of lexical and semantic signals produced the best F1 score overall.
+
+5. Discussion
+
+These results should be read carefully. A cosine similarity of 0.8 does not mean that a passage was copied; it means the two sentences occupy a similar region of the embedding space. Shared definitions, standard methodological descriptions and common terminology all produce high scores legitimately. Any deployment of semantic similarity for integrity screening therefore requires human review of the flagged passages, and the interface should show the matched text alongside the score so that reviewers can judge context.
+
+6. Conclusion
+
+Semantic similarity is a useful complement to lexical matching rather than a replacement for it. Systems that report exact, near-exact and semantic evidence separately give reviewers the information they need to distinguish copying from shared vocabulary.
+
+References
+
+Smith JA, Kumar R. Fingerprinting methods for large document collections. Journal of Information Integrity. 2019;14(2):112-129.
+
+Liu X, Andersen P. Paraphrase identification with contextual embeddings. Proceedings of the Conference on Computational Linguistics. 2021:445-458.
+
+Patel S, Okafor N. False positives in academic similarity detection. Research Ethics Quarterly. 2020;8(3):201-217.

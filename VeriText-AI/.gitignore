@@ -1,0 +1,43 @@
+# ---------------------------------------------------------------- Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ------------------------------------------------------------- Node / build
+node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+yarn-error.log*
+
+# ------------------------------------------------------------------- runtime
+# SQLite database, cached uploads, retained document text.
+storage/
+backend/storage/
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+backend/tmp/
+
+# ---------------------------------------------------------------- local env
+.env
+.env.local
+*.local
+
+# ----------------------------------------------------------------- editors
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# -------------------------------------------- generated evaluation artefacts
+# Keep docs/evaluation_results.md (a report) but ignore raw JSON dumps.
+docs/evaluation_results.json

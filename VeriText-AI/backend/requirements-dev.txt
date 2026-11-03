@@ -1,0 +1,11 @@
+# VeriText AI — development / test dependencies
+#
+#   pip install -r requirements-dev.txt
+#
+# Includes the runtime set above (which still excludes torch — install torch
+# separately so the CUDA wheel is not replaced, see docs/INSTALL_WINDOWS.md).
+
+-r requirements.txt
+
+pytest>=8.0
+ruff>=0.5

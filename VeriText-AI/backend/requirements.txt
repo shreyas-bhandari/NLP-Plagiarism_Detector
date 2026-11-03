@@ -1,0 +1,37 @@
+# VeriText AI — backend runtime dependencies
+#
+# PyTorch is deliberately NOT listed here.
+#
+# torch must be installed as its own step so that the wheel matching *your* GPU
+# and driver is the one that lands in the environment (CUDA 11.8 / 12.1 / 12.4 …
+# builds come from https://download.pytorch.org/whl, not from PyPI). Installing it
+# first also stops pip from replacing a working CUDA build with a CPU-only wheel
+# while resolving sentence-transformers. See docs/INSTALL_WINDOWS.md.
+#
+# Quick path (inside an activated environment, after torch):
+#     pip install -r requirements.txt
+#
+# Tested set: Python 3.11–3.13 · torch 2.2+ (CPU or CUDA) · sentence-transformers 3.x–6.x
+# The ranges below are the versions verified in development; they are ranges rather
+# than hard pins because CUDA-enabled torch wheels, Python versions and Windows
+# builds differ between machines.
+
+Flask>=3.0,<4.0
+Flask-Cors>=4.0
+Werkzeug>=3.0
+
+# NLP / embeddings
+sentence-transformers>=3.0
+transformers>=4.40
+huggingface-hub>=0.23
+scikit-learn>=1.4
+numpy>=1.26
+pandas>=2.1
+nltk>=3.8
+
+# Document extraction
+PyMuPDF>=1.24
+python-docx>=1.1
+
+# Reporting
+reportlab>=4.1
