@@ -218,3 +218,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# VeriText AI runtime artifacts
+backend/uploads/
+backend/reports/
+backend/db/
+backend/venv/
+backend/.venv/
+frontend/node_modules/
+frontend/dist/
+
+# Built frontend served by Flask
+!backend/dist/
